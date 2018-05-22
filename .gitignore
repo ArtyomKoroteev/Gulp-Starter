@@ -1,0 +1,24 @@
+# Dependency directories
+node_modules/
+
+#file
+package-lock.json
+
+### macOS ###
+*.DS_Store
+.AppleDouble
+.LSOverride
+
+### Windows ###
+# Windows image file caches
+Thumbs.db
+ehthumbs.db
+
+# Folder config file
+Desktop.ini
+
+# Windows shortcuts
+*.lnk
+
+#node#
+node_modules/
