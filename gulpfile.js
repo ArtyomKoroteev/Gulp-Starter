@@ -28,6 +28,7 @@ gulp.task('sass', function () {
 		.pipe(browserSync.reload({
 			stream: true
 		}))
+		.pipe(cssnano())
 		.pipe(gulp.dest('src/css'));
 });
 
@@ -55,8 +56,8 @@ gulp.task('html:build', function () {
 
 gulp.task('css:build', function () {
 
-	return gulp.src('dist/*.css')
-		.pipe(cssnano())
+	return gulp.src('src/css/*.css')
+
 		.pipe(gulp.dest('dist/css'));
 
 });
