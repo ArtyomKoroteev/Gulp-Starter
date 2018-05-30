@@ -55,7 +55,7 @@ gulp.task('html:build', function () {
 
 gulp.task('css:build', function () {
 
-	return gulp.src('src/css/*.css')
+	return gulp.src('dist/*.css')
 		.pipe(cssnano())
 		.pipe(gulp.dest('dist/css'));
 

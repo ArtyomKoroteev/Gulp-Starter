@@ -1,8 +1,9 @@
 @import 'libs.scss';
+@import 'fonts/fonts.scss';
 @import 'variables.scss';
 
 body {
 
 	background-color: $skyblue;
-
+	text-align: center;
 }
