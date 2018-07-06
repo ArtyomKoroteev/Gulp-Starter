@@ -4,6 +4,7 @@ var gulp = require('gulp'),
 	sass = require('gulp-sass'),
 	browserSync = require('browser-sync'),
 	uglify = require('gulp-uglify'),
+	babel = require("gulp-babel"),
 	concat = require('gulp-concat'),
 	htmlmin = require('gulp-htmlmin'),
 	cssnano = require('gulp-cssnano'),
@@ -35,8 +36,8 @@ gulp.task('sass', function () {
 gulp.task('js', function () {
 
 	return gulp.src([
-		'src/libs/jquery/dist/jquery.min.js'
-	])
+			'node_modules/jquery/dist/jquery.min.js'
+		])
 		.pipe(concat('libs.min.js'))
 		.pipe(uglify())
 		.pipe(gulp.dest('src/js'));
@@ -65,7 +66,10 @@ gulp.task('css:build', function () {
 gulp.task('js:build', function () {
 
 	return gulp.src('src/js/*.js')
-
+		.pipe(babel({
+			presets: ['env']
+		}))
+		.pipe(uglify())
 		.pipe(gulp.dest('dist/js'));
 
 });
@@ -110,9 +114,10 @@ gulp.task('watch', ['browser-sync', 'js'], function () {
 
 gulp.task('build', function () {
 	sequence('clean', ['html:build',
-    'css:build',
-	'js:build',
-    'img:build'])
+		'css:build',
+		'js:build',
+		'img:build'
+	])
 });
 
 gulp.task('default', ['watch']);
