@@ -1,6 +1,7 @@
 'use strict'
 
 var gulp = require('gulp'),
+	pug = require('gulp-pug'),
 	sass = require('gulp-sass'),
 	browserSync = require('browser-sync'),
 	uglify = require('gulp-uglify'),
@@ -16,6 +17,17 @@ var gulp = require('gulp'),
 	del = require('del'),
 	sequence = require('run-sequence');
 
+gulp.task('pug', function () {
+
+	return gulp.src('src/pug/*.pug')
+
+		.pipe(pug({
+			pretty: true
+		}))
+		.pipe(gulp.dest('dist'));
+
+});
+
 gulp.task('sass', function () {
 
 	return gulp.src('src/sass/**/*.+(scss|sass)')
@@ -30,7 +42,7 @@ gulp.task('sass', function () {
 			stream: true
 		}))
 		.pipe(cssnano())
-		.pipe(gulp.dest('src/css'));
+		.pipe(gulp.dest('dist/css'));
 });
 
 gulp.task('js', function () {
@@ -106,10 +118,10 @@ gulp.task('clean', function () {
 	return del.sync('dist/*');
 });
 
-gulp.task('watch', ['browser-sync', 'js'], function () {
+gulp.task('watch', ['browser-sync', 'js', 'pug'], function () {
 	gulp.watch('src/sass/**/*.+(scss|sass)', ['sass']);
 	gulp.watch('src/js/**/*.js', browserSync.reload);
-	gulp.watch('src/**/*.html', browserSync.reload);
+	gulp.watch('src/pug/**/*.pug', browserSync.reload);
 });
 
 gulp.task('build', function () {
