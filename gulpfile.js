@@ -4,6 +4,8 @@ var gulp = require('gulp'),
 	pug = require('gulp-pug'),
 	sass = require('gulp-sass'),
 	browserSync = require('browser-sync'),
+	plumber = require('gulp-plumber'),
+	notify = require('gulp-notify'),
 	uglify = require('gulp-uglify'),
 	babel = require("gulp-babel"),
 	concat = require('gulp-concat'),
@@ -21,10 +23,15 @@ gulp.task('pug', function () {
 
 	return gulp.src('src/pug/*.pug')
 
+		.pipe(plumber())
 		.pipe(pug({
 			pretty: true
 		}))
-		.pipe(gulp.dest('dist'));
+		.on("error", notify.onError({
+			message: "Error: <%= error.message %>",
+			title: "Error in PUG"
+		}))
+		.pipe(gulp.dest('src'));
 
 });
 
@@ -33,7 +40,11 @@ gulp.task('sass', function () {
 	return gulp.src('src/sass/**/*.+(scss|sass)')
 
 		.pipe(sourcemaps.init())
-		.pipe(sass().on('error', sass.logError))
+		.pipe(sass())
+		.on("error", notify.onError({
+			message: "Error: <%= error.message %>",
+			title: "Error in SASS"
+		}))
 		.pipe(autoprefixer(['last 10 versions'], {
 			cascade: true
 		}))
@@ -42,7 +53,7 @@ gulp.task('sass', function () {
 			stream: true
 		}))
 		.pipe(cssnano())
-		.pipe(gulp.dest('dist/css'));
+		.pipe(gulp.dest('src/css'));
 });
 
 gulp.task('js', function () {
@@ -118,10 +129,13 @@ gulp.task('clean', function () {
 	return del.sync('dist/*');
 });
 
-gulp.task('watch', ['browser-sync', 'js', 'pug'], function () {
+gulp.task('watch', ['browser-sync', 'js', ], function () {
+
+	gulp.watch('src/pug/**/*.pug', ['pug']);
 	gulp.watch('src/sass/**/*.+(scss|sass)', ['sass']);
+	gulp.watch('dist/*.html', browserSync.reload);
 	gulp.watch('src/js/**/*.js', browserSync.reload);
-	gulp.watch('src/pug/**/*.pug', browserSync.reload);
+	
 });
 
 gulp.task('build', function () {
