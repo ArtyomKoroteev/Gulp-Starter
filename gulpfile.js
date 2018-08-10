@@ -1,13 +1,12 @@
 'use strict'
 
 var gulp = require('gulp'),
+	browserSync = require('browser-sync').create(),
 	pug = require('gulp-pug'),
 	sass = require('gulp-sass'),
-	browserSync = require('browser-sync'),
 	plumber = require('gulp-plumber'),
 	notify = require('gulp-notify'),
 	uglify = require('gulp-uglify'),
-	babel = require("gulp-babel"),
 	concat = require('gulp-concat'),
 	htmlmin = require('gulp-htmlmin'),
 	cssnano = require('gulp-cssnano'),
@@ -16,8 +15,8 @@ var gulp = require('gulp'),
 	imagemin = require('gulp-imagemin'),
 	pngquant = require('imagemin-pngquant'),
 	cache = require('gulp-cache'),
-	del = require('del'),
-	sequence = require('run-sequence');
+	del = require('del');
+
 
 gulp.task('pug', function () {
 
@@ -31,7 +30,8 @@ gulp.task('pug', function () {
 			message: "Error: <%= error.message %>",
 			title: "Error in PUG"
 		}))
-		.pipe(gulp.dest('src'));
+		.pipe(gulp.dest('src'))
+		.on('end', browserSync.reload);
 
 });
 
@@ -53,18 +53,25 @@ gulp.task('sass', function () {
 			stream: true
 		}))
 		.pipe(cssnano())
-		.pipe(gulp.dest('src/css'));
+		.pipe(gulp.dest('src/css'))
+		.on('end', browserSync.reload);
 });
 
-gulp.task('js', function () {
-
+gulp.task('scripts:lib', function () {
 	return gulp.src([
-			'node_modules/jquery/dist/jquery.min.js'
+			'node_modules/jquery/dist/jquery.min.js',
 		])
 		.pipe(concat('libs.min.js'))
 		.pipe(uglify())
-		.pipe(gulp.dest('src/js'));
+		.pipe(gulp.dest('src/js'))
 
+});
+
+gulp.task('scripts', function () {
+	return gulp.src('src/js/script.js')
+		.pipe(browserSync.reload({
+			stream: true
+		}));
 });
 
 gulp.task('html:build', function () {
@@ -89,9 +96,6 @@ gulp.task('css:build', function () {
 gulp.task('js:build', function () {
 
 	return gulp.src('src/js/*.js')
-		.pipe(babel({
-			presets: ['env']
-		}))
 		.pipe(uglify())
 		.pipe(gulp.dest('dist/js'));
 
@@ -111,14 +115,12 @@ gulp.task('img:build', function () {
 });
 
 gulp.task('browser-sync', function () {
-
-	browserSync({
+	browserSync.init({
 		server: {
-			baseDir: 'src'
+			baseDir: './src'
 		},
 		notify: false
 	});
-
 });
 
 gulp.task('clear-cache', function () {
@@ -129,21 +131,21 @@ gulp.task('clean', function () {
 	return del.sync('dist/*');
 });
 
-gulp.task('watch', ['browser-sync', 'js', ], function () {
+// gulp.task('build', function () {
+// 	sequence('clean', ['html:build',
+// 		'css:build',
+// 		'js:build',
+// 		'img:build'
+// 	])
+// });
 
-	gulp.watch('src/pug/**/*.pug', ['pug']);
-	gulp.watch('src/sass/**/*.+(scss|sass)', ['sass']);
-	gulp.watch('dist/*.html', browserSync.reload);
-	gulp.watch('src/js/**/*.js', browserSync.reload);
-	
+gulp.task('watch', function () {
+	gulp.watch('src/pug/**/*.pug', gulp.series('pug'));
+	gulp.watch('src/sass/**/*.+(scss|sass)', gulp.series('sass'));
+	gulp.watch('src/js/**/*.js', gulp.series('scripts'));
 });
 
-gulp.task('build', function () {
-	sequence('clean', ['html:build',
-		'css:build',
-		'js:build',
-		'img:build'
-	])
-});
-
-gulp.task('default', ['watch']);
+gulp.task('default', gulp.series(
+	gulp.parallel('pug', 'sass', 'scripts', 'scripts:lib'),
+	gulp.parallel('watch', 'browser-sync')
+));
