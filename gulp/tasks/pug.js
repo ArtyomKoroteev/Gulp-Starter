@@ -1,10 +1,11 @@
-const gulp =          require('gulp'),
-      pug =           require('gulp-pug'),
-      plumber =       require('gulp-plumber'),
-      notify =        require('gulp-notify'),
-      browserSync =   require('browser-sync').create();
+const gulp = require('gulp'),
+  pug = require('gulp-pug'),
+  plumber = require('gulp-plumber'),
+  notify = require('gulp-notify'),
+  htmlmin = require('gulp-htmlmin'),
+  browserSync = require('browser-sync').create();
 
-module.exports = function() {
+module.exports = function () {
 
   gulp.task('pug', () => {
     return gulp.src('src/pug/*.pug')
@@ -18,6 +19,17 @@ module.exports = function() {
       }))
       .pipe(gulp.dest('src'))
       .on('end', browserSync.reload);
+  });
+
+  gulp.task('html:build', ()=> {
+
+    return gulp.src('src/*.html')
+      .pipe(htmlmin({
+        sortAttributes: true,
+        sortClassName: true,
+        collapseWhitespace: true
+      }))
+      .pipe(gulp.dest('dist'));
   });
 
 }
