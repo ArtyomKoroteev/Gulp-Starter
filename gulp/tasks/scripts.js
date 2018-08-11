@@ -5,14 +5,14 @@ const gulp =           require('gulp'),
 
 module.exports = function () {
 
-  gulp.task('scripts', function () {
+  gulp.task('scripts', () => {
     return gulp.src('src/js/script.js')
       .pipe(browserSync.reload({
         stream: true
       }));
   });
 
-  gulp.task('scriptsLib', function () {
+  gulp.task('scriptsLib', () => {
     return gulp.src([
         'node_modules/jquery/dist/jquery.min.js',
       ])
@@ -22,7 +22,7 @@ module.exports = function () {
 
   });
 
-  gulp.task('scripts:build', function () {
+  gulp.task('scripts:build', () => {
     return gulp.src('src/js/*.js')
       .pipe(uglify())
       .pipe(gulp.dest('dist/js'));

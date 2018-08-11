@@ -27,4 +27,9 @@ module.exports = function() {
       .on('end', browserSync.reload);
   });
 
+  gulp.task('css:build', function () {
+	return gulp.src('src/css/*.css')
+		.pipe(gulp.dest('dist/css'));
+  });
+
 }

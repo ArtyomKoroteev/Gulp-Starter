@@ -34,14 +34,6 @@ path.tasks.forEach((taskPath)=>
 // 		.pipe(gulp.dest('dist'));
 // });
 
-// gulp.task('css:build', function () {
-
-// 	return gulp.src('src/css/*.css')
-
-// 		.pipe(gulp.dest('dist/css'));
-
-// });
-
 
 
 // gulp.task('img:build', function () {
