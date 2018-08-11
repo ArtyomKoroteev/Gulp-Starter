@@ -1,5 +1,5 @@
 @import 'libs.scss';
-//@import 'fonts/fonts.scss';
+@import 'mixins.scss';
 @import 'variables.scss';
 
 body {
@@ -7,10 +7,7 @@ body {
 	text-align: center;
 	font-size: 40px;
 	color: white;
-}
-
-body h1 {
-
-	color: blueviolet;
-
+	h1 {
+		color: blueviolet;
+	}
 }
