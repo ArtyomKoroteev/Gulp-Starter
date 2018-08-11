@@ -1,46 +1,27 @@
 'use strict'
 
-// var gulp = require('gulp'),
-// 	browserSync = require('browser-sync').create(),
-// 	// pug = require('gulp-pug'),
-// 	// sass = require('gulp-sass'),
-// 	// plumber = require('gulp-plumber'),
-// 	// notify = require('gulp-notify'),
-// 	uglify = require('gulp-uglify'),
-// 	concat = require('gulp-concat'),
-// 	htmlmin = require('gulp-htmlmin'),
-// 	// cssnano = require('gulp-cssnano'),
-// 	// sourcemaps = require('gulp-sourcemaps'),
-// 	// autoprefixer = require('gulp-autoprefixer'),
-// 	imagemin = require('gulp-imagemin'),
-// 	pngquant = require('imagemin-pngquant'),
-// 	cache = require('gulp-cache'),
-// 	del = require('del');
+var gulp = require('gulp'),
+	browserSync = require('browser-sync').create(),
+	pug = require('gulp-pug'),
+	sass = require('gulp-sass'),
+	plumber = require('gulp-plumber'),
+	notify = require('gulp-notify'),
+	uglify = require('gulp-uglify'),
+	concat = require('gulp-concat'),
+	htmlmin = require('gulp-htmlmin'),
+	cssnano = require('gulp-cssnano'),
+	sourcemaps = require('gulp-sourcemaps'),
+	autoprefixer = require('gulp-autoprefixer'),
+	imagemin = require('gulp-imagemin'),
+	pngquant = require('imagemin-pngquant'),
+	cache = require('gulp-cache'),
+	del = require('del');
 
 const path = {
 	tasks: require('./gulp/gulpConfig.js')
 }
 path.tasks.forEach((taskPath)=>
 	require(taskPath)());
-
-
-
-// gulp.task('scripts:lib', function () {
-// 	return gulp.src([
-// 			'node_modules/jquery/dist/jquery.min.js',
-// 		])
-// 		.pipe(concat('libs.min.js'))
-// 		.pipe(uglify())
-// 		.pipe(gulp.dest('src/js'))
-
-// });
-
-// gulp.task('scripts', function () {
-// 	return gulp.src('src/js/script.js')
-// 		.pipe(browserSync.reload({
-// 			stream: true
-// 		}));
-// });
 
 // gulp.task('html:build', function () {
 
@@ -61,13 +42,7 @@ path.tasks.forEach((taskPath)=>
 
 // });
 
-// gulp.task('js:build', function () {
 
-// 	return gulp.src('src/js/*.js')
-// 		.pipe(uglify())
-// 		.pipe(gulp.dest('dist/js'));
-
-// });
 
 // gulp.task('img:build', function () {
 // 	return gulp.src('src/img/**/*')
