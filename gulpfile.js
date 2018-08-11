@@ -18,36 +18,10 @@ var gulp = require('gulp'),
 	del = require('del');
 
 const path = {
-	tasks: require('./gulp/gulpConfig.js')
+			tasks: require('./gulp/gulpConfig.js')
 }
 path.tasks.forEach((taskPath)=>
 	require(taskPath)());
-
-// gulp.task('html:build', function () {
-
-// 	return gulp.src('src/*.html')
-// 		.pipe(htmlmin({
-// 			sortAttributes: true,
-// 			sortClassName: true,
-// 			collapseWhitespace: true
-// 		}))
-// 		.pipe(gulp.dest('dist'));
-// });
-
-
-
-// gulp.task('img:build', function () {
-// 	return gulp.src('src/img/**/*')
-// 		.pipe(cache(imagemin({
-// 			interlaced: true,
-// 			progressive: true,
-// 			svgoPlugins: [{
-// 				removeViewBox: false
-// 			}],
-// 			use: [pngquant()]
-// 		})))
-// 		.pipe(gulp.dest('dist/img'));
-// });
 
 // gulp.task('clear-cache', function () {
 // 	return cache.clearAll();
@@ -64,8 +38,6 @@ path.tasks.forEach((taskPath)=>
 // 		'img:build'
 // 	])
 // });
-
-
 
 // gulp.task('default', gulp.series(
 // 	gulp.parallel('pug', 'sass', 'scripts', 'scripts:lib'),
