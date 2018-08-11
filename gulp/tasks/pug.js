@@ -1,9 +1,9 @@
 const gulp = require('gulp'),
-  pug = require('gulp-pug'),
-  plumber = require('gulp-plumber'),
-  notify = require('gulp-notify'),
-  htmlmin = require('gulp-htmlmin'),
-  browserSync = require('browser-sync').create();
+      pug = require('gulp-pug'),
+      plumber = require('gulp-plumber'),
+      notify = require('gulp-notify'),
+      htmlmin = require('gulp-htmlmin'),
+      browserSync = require('browser-sync').create();
 
 module.exports = function () {
 
