@@ -3,6 +3,7 @@ const gulp =          require('gulp'),
       cssnano =       require('gulp-cssnano'),
       notify =        require('gulp-notify'),
       autoprefixer =  require('gulp-autoprefixer'),
+      sourcemaps =    require('gulp-sourcemaps'),
       browserSync =   require('browser-sync').create();
 
 module.exports = function() {

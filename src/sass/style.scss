@@ -5,9 +5,10 @@
 body {
 	background-color: skyblue;
 	text-align: center;
-	font-size: 40px;
-	color: white;
+
 	h1 {
-		color: blueviolet;
+		color: $white;
+		font-size: remSize(76);
+		@include absoluteCenter();
 	}
 }

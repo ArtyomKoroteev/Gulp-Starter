@@ -10,6 +10,7 @@ module.exports = function() {
       },
       notify: false
     });
+    browserSync.watch('src', browserSync.reload);
   });
 
 }
