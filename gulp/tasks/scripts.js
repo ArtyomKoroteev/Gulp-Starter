@@ -1,7 +1,8 @@
-const gulp =           require('gulp'),
-      browserSync =    require('browser-sync').create(),
-      uglify =         require('gulp-uglify'),
-      concat =         require('gulp-concat');
+const gulp = require('gulp'),
+  babel = require('gulp-babel'),
+  browserSync = require('browser-sync').create(),
+  uglify = require('gulp-uglify'),
+  concat = require('gulp-concat');
 
 module.exports = function () {
 
@@ -9,7 +10,11 @@ module.exports = function () {
     return gulp.src('src/js/script.js')
       .pipe(browserSync.reload({
         stream: true
-      }));
+      }))
+      .pipe(babel({
+        presets: ['env']
+      }))
+      .pipe(gulp.dest('dist/js'));
   });
 
   gulp.task('scriptsLib', () => {
