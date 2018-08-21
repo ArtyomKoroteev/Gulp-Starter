@@ -1,6 +1,7 @@
 @import 'libs.scss';
 @import 'mixins.scss';
 @import 'variables.scss';
+// @import 'sprite.scss';
 
 body {
 	background-color: skyblue;
@@ -11,4 +12,14 @@ body {
 		font-size: remSize(76);
 		@include absoluteCenter();
 	}
+}
+
+.icon {
+	fill: #fff;
+	width: 64px;
+	height: 64px;
+}
+
+.social {
+	width: 30%;
 }

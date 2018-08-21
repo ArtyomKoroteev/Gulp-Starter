@@ -17,6 +17,6 @@ gulp.task('build', () => {
 });	
 
 gulp.task('default', gulp.series(
-	gulp.parallel('pug', 'sass', 'scripts', 'scriptsLib'),
+	gulp.parallel('pug', 'sass', 'scripts', 'scriptsLib','svg'),
 	gulp.parallel('watch', 'browser-sync')
 ));
