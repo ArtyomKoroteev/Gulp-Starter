@@ -7,6 +7,7 @@ module.exports = function() {
     gulp.watch('src/sass/**/*.+(scss|sass)', gulp.series('sass'));
     gulp.watch('src/js/**/*.js', gulp.series('scripts'));
     gulp.watch('src/img/svg/*.svg', gulp.series('svg'));
+    gulp.watch('src/img/**/*', gulp.series('img'));
   });
 
 }

@@ -1,12 +1,12 @@
-const gulp =          require('gulp'),
-      sass =          require('gulp-sass'),
-      cssnano =       require('gulp-cssnano'),
-      notify =        require('gulp-notify'),
-      autoprefixer =  require('gulp-autoprefixer'),
-      sourcemaps =    require('gulp-sourcemaps'),
-      browserSync =   require('browser-sync').create();
+const gulp = require('gulp'),
+  sass = require('gulp-sass'),
+  cssnano = require('gulp-cssnano'),
+  notify = require('gulp-notify'),
+  autoprefixer = require('gulp-autoprefixer'),
+  sourcemaps = require('gulp-sourcemaps'),
+  browserSync = require('browser-sync').create();
 
-module.exports = function() {
+module.exports = function () {
 
   gulp.task('sass', () => {
     return gulp.src('src/sass/**/*.+(scss|sass)')
@@ -19,18 +19,18 @@ module.exports = function() {
       .pipe(autoprefixer(['last 10 versions'], {
         cascade: true
       }))
-      .pipe(sourcemaps.write())
       .pipe(browserSync.reload({
         stream: true
       }))
-      .pipe(cssnano())
-      .pipe(gulp.dest('src/css'))
+      .pipe(sourcemaps.write())
+      .pipe(gulp.dest('dist/css'))
       .on('end', browserSync.reload);
   });
 
   gulp.task('css:build', () => {
-	return gulp.src('src/css/*.css')
-		.pipe(gulp.dest('dist/css'));
+    return gulp.src('dist/css/*.css')
+      .pipe(cssnano())
+      .pipe(gulp.dest('build/css'));
   });
 
 }

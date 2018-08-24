@@ -4,11 +4,11 @@ const gulp =          require('gulp'),
 
 module.exports = function () {
 
-  gulp.task('clean', function () {
-    return del.sync('dist/*');
+  gulp.task('clean', () => {
+    return del['./dist'];
   });
 
-  gulp.task('clear-cache', function () {
+  gulp.task('clear-cache',() => {
     return cache.clearAll();
   });
 

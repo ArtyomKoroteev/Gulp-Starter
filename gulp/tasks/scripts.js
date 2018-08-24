@@ -20,18 +20,17 @@ module.exports = function () {
   gulp.task('scriptsLib', () => {
     return gulp.src([
         'node_modules/jquery/dist/jquery.min.js',
-        // 'node_modules/svg4everybody/dist/svg4everybody.min.js'
       ])
       .pipe(concat('libs.min.js'))
       .pipe(uglify())
-      .pipe(gulp.dest('src/js'))
+      .pipe(gulp.dest('dist/js'))
 
   });
 
   gulp.task('scripts:build', () => {
-    return gulp.src('src/js/*.js')
+    return gulp.src('dist/js/*.js')
       .pipe(uglify())
-      .pipe(gulp.dest('dist/js'));
+      .pipe(gulp.dest('build/js'));
   });
 
 }

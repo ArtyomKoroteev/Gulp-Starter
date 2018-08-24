@@ -17,19 +17,19 @@ module.exports = function () {
         message: "Error: <%= error.message %>",
         title: "Error in PUG"
       }))
-      .pipe(gulp.dest('src'))
+      .pipe(gulp.dest('dist'))
       .on('end', browserSync.reload);
   });
 
   gulp.task('html:build', ()=> {
 
-    return gulp.src('src/*.html')
+    return gulp.src('dist/*.html')
       .pipe(htmlmin({
         sortAttributes: true,
         sortClassName: true,
         collapseWhitespace: true
       }))
-      .pipe(gulp.dest('dist'));
+      .pipe(gulp.dest('build'));
   });
 
 }

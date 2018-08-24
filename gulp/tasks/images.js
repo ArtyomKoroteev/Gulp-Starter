@@ -1,11 +1,14 @@
-const gulp =          require('gulp'),
-      imagemin =      require('gulp-imagemin'),
-      pngquant =      require('imagemin-pngquant');
+const gulp = require('gulp');
 
   module.exports = function () {
 
+    gulp.task('img', () => {
+      return gulp.src('src/img/**/*.jpg')
+        .pipe(gulp.dest('dist/img'));
+    });
+
     gulp.task('img:build', () => {
-      return gulp.src('src/img/**/*')
+      return gulp.src('dist/img/**/*')
         .pipe(cache(imagemin({
           interlaced: true,
           progressive: true,
@@ -14,7 +17,7 @@ const gulp =          require('gulp'),
           }],
           use: [pngquant()]
         })))
-        .pipe(gulp.dest('dist/img'));
+        .pipe(gulp.dest('build/img'));
     });
 
   }

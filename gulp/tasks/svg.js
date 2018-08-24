@@ -1,8 +1,8 @@
-const gulp =          require('gulp'),
-      cheerio =       require('gulp-cheerio'),
-      svgmin =        require('gulp-svgmin'),
-      svgSprite =     require('gulp-svg-sprite'),
-      replace =       require('gulp-replace');
+const gulp = require('gulp'),
+  cheerio = require('gulp-cheerio'),
+  svgmin = require('gulp-svgmin'),
+  svgSprite = require('gulp-svg-sprite'),
+  replace = require('gulp-replace');
 
 module.exports = function () {
 
@@ -31,7 +31,6 @@ module.exports = function () {
           }
         }
       }))
-      .pipe(gulp.dest('./src/svg/'));
-
+      .pipe(gulp.dest('./dist/img/svg/'));
   });
 };
