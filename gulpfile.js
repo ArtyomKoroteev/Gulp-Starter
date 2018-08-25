@@ -9,11 +9,8 @@ path.tasks.forEach((taskPath) =>
 	require(taskPath)());
 
 gulp.task('build', gulp.series(
-	gulp.parallel('clean',
-		'html:build',
-		'css:build',
-		'js:build',
-		'img:build')
+	'clean',
+	gulp.parallel('html:build', 'css:build', 'scripts:build','img:build')
 ));
 
 gulp.task('default', gulp.series(

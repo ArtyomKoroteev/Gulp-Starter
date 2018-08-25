@@ -5,7 +5,7 @@ const gulp =          require('gulp'),
 module.exports = function () {
 
   gulp.task('clean', () => {
-    return del['./dist'];
+    return del('./build');
   });
 
   gulp.task('clear-cache',() => {
