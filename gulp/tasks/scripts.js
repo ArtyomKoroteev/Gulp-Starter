@@ -20,6 +20,7 @@ module.exports = function () {
   gulp.task('scriptsLib', () => {
     return gulp.src([
         'node_modules/jquery/dist/jquery.min.js',
+        'node_modules/svg4everybody/dist/svg4everybody.min.js'
       ])
       .pipe(concat('libs.min.js'))
       .pipe(uglify())
