@@ -10,10 +10,10 @@ path.tasks.forEach((taskPath) =>
 
 gulp.task('build', gulp.series(
 	'clean',
-	gulp.parallel('html:build', 'css:build', 'scripts:build','img:build')
+	gulp.parallel('html:build', 'css:build', 'scripts:build','img:build', 'fonts:build')
 ));
 
 gulp.task('default', gulp.series(
-	gulp.parallel('pug', 'sass', 'scripts', 'scriptsLib', 'svg', 'img'),
+	gulp.parallel('pug', 'sass', 'scripts', 'scriptsLib', 'svg', 'img', 'fonts'),
 	gulp.parallel('watch', 'browser-sync')
 ));
